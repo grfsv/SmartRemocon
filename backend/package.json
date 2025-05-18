@@ -14,17 +14,22 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "@types/mqtt": "^0.0.34",
     "express": "^5.1.0",
-    "mqtt": "^5.10.4",
+    "mqtt": "^5.11.0",
     "mysql2": "^3.14.0",
     "reflect-metadata": "^0.2.2",
     "socket.io": "^4.8.1",
-    "typeorm": "^0.3.22"
+    "tsyringe": "^4.10.0",
+    "typeorm": "^0.3.22",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
     "prettier": "3.5.3",
+    "prisma": "^6.6.0",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.2"
