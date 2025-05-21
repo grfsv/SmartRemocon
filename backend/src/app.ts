@@ -14,34 +14,24 @@
 
 // Expressライブラリをインポート（Node.jsのWebアプリケーションフレームワーク）
 import express from 'express';
-import { Server, Socket } from 'socket.io';
 import 'reflect-metadata';
 // httpモジュールをインポート（Node.jsの標準モジュール、HTTPサーバーを作成するために使用）
 import http from 'http';
 import { container } from 'tsyringe';
 import { WebSocketController } from './infrastructure/websocket/websocket';
 import apiRoutes from './routes/routes';
-// import { getEnvLogs, updateEnv } from './useCase/getEnvLogsUseCase';
 
-import { EnvLogRepositoryImpl } from './infrastructure/database/envLogRepositoryImpl';
-import { EnvLogRepository } from './domain/repositories/envLogRepository';
-import { PrismaClient } from '@prisma/client';
+import { UpdateEnvLogUseCase } from './usecases/updateEnvLogUseCase';
+import { MqttController } from './mqtt';
+import { initializeContainer } from './di/container';
 
 // expressアプリケーションのインスタンスを作成
 const app = express();
 
 // HTTPサーバーをexpressアプリを基に作成
-export const httpServer: http.Server = http.createServer(app);
+const httpServer: http.Server = http.createServer(app);
 
-// 依存関係を登録
-container.register<EnvLogRepository>('EnvLogRepository', { useClass: EnvLogRepositoryImpl });
-// コンテナにHTTPサーバーを登録
-container.registerInstance<http.Server>('WebServer', httpServer);
-
-const prismaClient = new PrismaClient();
-
-container.register('PrismaClient', { useValue: prismaClient });
-
+initializeContainer(httpServer);
 // WebSocketの依存関係を解消
 container.resolve(WebSocketController);
 
@@ -51,7 +41,10 @@ app.use(express.json());
 // ルーティングの設定
 app.use('/api', apiRoutes);
 
-const mqttClient = require('./mqtt').mqttClient;
+const useCase = container.resolve(UpdateEnvLogUseCase);
+
+const client = new MqttController();
+
 
 // mqttClient.subscribe('env-data', updateEnv);
 // サーバーがリッスンするポート番号を指定

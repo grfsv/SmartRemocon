@@ -1,11 +1,11 @@
 import { injectable, inject } from 'tsyringe';
 import http from 'http';
 import { Server } from 'socket.io';
-import { UpdateEnvLogsOutputPort } from '../../interface/presenters/updateEnvLogsOutputPort';
+import { UpdateEnvLogOutputPort } from '../../interface/presenters/updateEnvLogOutputPort';
 import { EnvLog } from '../../domain/entities/envLog';
 
 @injectable()
-export class WebSocketController implements UpdateEnvLogsOutputPort {
+export class WebSocketController implements UpdateEnvLogOutputPort {
     private wss: Server;
 
     constructor(@inject('WebServer') webServer: http.Server) {

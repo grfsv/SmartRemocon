@@ -7,10 +7,8 @@ import { injectable, inject } from 'tsyringe';
 
 @injectable()
 export class EnvLogRepositoryImpl extends EnvLogRepository {
-    private prisma: PrismaClient;
-    constructor(@inject('PrismaClient') private prismaClient: PrismaClient) {
+    constructor(@inject('PrismaClient') private readonly prisma: PrismaClient) {
         super();
-        this.prisma = prismaClient;
     }
 
     async findMany(limit: number): Promise<EnvLog[]> {
@@ -22,7 +20,6 @@ export class EnvLogRepositoryImpl extends EnvLogRepository {
 
         // ドメイン型に変換して返す
         const res = envLogs.map((envLog) => EnvLogMapper.toDomain(envLog));
-        console.log('res', res);
         return res;
     }
     async create(envLog: EnvLog): Promise<EnvLog> {

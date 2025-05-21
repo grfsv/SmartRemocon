@@ -1,11 +1,16 @@
-import { container } from 'tsyringe';
-import { GetEnvLogsUseCase } from '../../usecases/getEnvLogsUseCase';
+import { inject, injectable } from 'tsyringe';
+import { EnvLog } from '../../domain/entities/envLog';
+import { UseCase } from '../../usecases/common/usecase';
+@injectable()
+export class GetListEnvLogController {
+    constructor(
+        @inject('GetListEnvLogUseCase') private readonly useCase: UseCase<number, EnvLog[]>,
+    ) {}
 
-export class EnvLogController {
-    static async getEnvLogs(req: any, res: any): Promise<void> {
+    async run(req: any, res: any): Promise<void> {
         try {
-            const useCase = container.resolve(GetEnvLogsUseCase);
-            const envLogs = await useCase.execute(10); // ここでlimitを指定
+            const limit = parseInt(req.query.limit) || 30; // クエリパラメータからlimitを取得
+            const envLogs = await this.useCase.execute(limit);
 
             const envLogDataWithoutUnderscore = envLogs.map((item) => {
                 const newItem: { [key: string]: any } = {
@@ -21,7 +26,7 @@ export class EnvLogController {
 
                 return newItem;
             });
-            
+
             res.status(200).json(envLogDataWithoutUnderscore);
         } catch (error) {
             console.error('Error fetching env logs:', error);
