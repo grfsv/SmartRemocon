@@ -1,13 +1,13 @@
 import { injectable, inject } from 'tsyringe';
 import { EnvLog } from '../domain/entities/envLog';
 import { EnvLogRepository } from '../domain/repositories/envLogRepository';
-import { UpdateEnvLogOutputPort } from '../interface/presenters/updateEnvLogOutputPort';
+import { UpdateEnvLogPresenter } from '../interface/presenters/updateEnvLogPresenter';
 
 @injectable()
 export class UpdateEnvLogUseCase {
     constructor(
         @inject('UpdateEnvLogOutputPort')
-        private readonly output: UpdateEnvLogOutputPort,
+        private readonly output: UpdateEnvLogPresenter,
         @inject('EnvLogRepository')
         private readonly repo: EnvLogRepository,
     ) {}

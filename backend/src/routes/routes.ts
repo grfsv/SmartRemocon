@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { GetListEnvLogController } from '../interface/controllers/envLogController';
 import { container } from 'tsyringe';
-import { GetListEnvLogUseCase } from '../usecases/getListEnvLogUseCase';
 
 const apiRoutes: Router = Router();
 

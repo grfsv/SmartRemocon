@@ -1,11 +1,9 @@
 import { injectable, inject } from 'tsyringe';
 import http from 'http';
 import { Server } from 'socket.io';
-import { UpdateEnvLogOutputPort } from '../../interface/presenters/updateEnvLogOutputPort';
-import { EnvLog } from '../../domain/entities/envLog';
 
 @injectable()
-export class WebSocketController implements UpdateEnvLogOutputPort {
+export class WebSocketClient {
     private wss: Server;
 
     constructor(@inject('WebServer') webServer: http.Server) {
@@ -23,12 +21,8 @@ export class WebSocketController implements UpdateEnvLogOutputPort {
             });
         });
     }
-
-    present(data: EnvLog | null): void {
-        if (data) {
-            this.wss.emit('env-data', data);
-        } else {
-            console.error('No data to emit');
-        }
+    
+    present(data: any) {
+        this.wss.emit('present', data);
     }
 }

@@ -16,7 +16,6 @@ export class EnvLogRepositoryImpl extends EnvLogRepository {
             take: limit,
             orderBy: { created_at: 'desc' },
         });
-        console.log('envLogs', envLogs);
 
         // ドメイン型に変換して返す
         const res = envLogs.map((envLog) => EnvLogMapper.toDomain(envLog));

@@ -1,4 +1,4 @@
-import  { Device } from './device';
+import { Device } from './device';
 
 type IRSensorValueProps = {
     id: number;
@@ -57,7 +57,7 @@ export class IRSensorValue {
     set createdAt(createdAt: Date) {
         this._createdAt = createdAt;
     }
-    
+
     get updatedAt(): Date {
         return this._updatedAt;
     }

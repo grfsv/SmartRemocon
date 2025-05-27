@@ -1,11 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 import { EnvLog } from '../../domain/entities/envLog';
-import { UseCase } from '../../usecases/common/usecase';
+import { GetListEnvLogUseCase } from '../../usecases/getListEnvLogUseCase';
 @injectable()
 export class GetListEnvLogController {
-    constructor(
-        @inject('GetListEnvLogUseCase') private readonly useCase: UseCase<number, EnvLog[]>,
-    ) {}
+    constructor(@inject('GetListEnvLogUseCase') private readonly useCase: GetListEnvLogUseCase) {}
 
     async run(req: any, res: any): Promise<void> {
         try {

@@ -18,11 +18,10 @@ import 'reflect-metadata';
 // httpモジュールをインポート（Node.jsの標準モジュール、HTTPサーバーを作成するために使用）
 import http from 'http';
 import { container } from 'tsyringe';
-import { WebSocketController } from './infrastructure/websocket/websocket';
+import { WebSocketClient } from './infrastructure/websocket/websocket';
 import apiRoutes from './routes/routes';
 
-import { UpdateEnvLogUseCase } from './usecases/updateEnvLogUseCase';
-import { MqttController } from './mqtt';
+import { MqttClient } from './infrastructure/mqtt/mqtt';
 import { initializeContainer } from './di/container';
 
 // expressアプリケーションのインスタンスを作成
@@ -33,7 +32,7 @@ const httpServer: http.Server = http.createServer(app);
 
 initializeContainer(httpServer);
 // WebSocketの依存関係を解消
-container.resolve(WebSocketController);
+container.resolve(WebSocketClient);
 
 // 受信するリクエストのボディをJSONとして自動的に解析するミドルウェアを追加
 app.use(express.json());
@@ -41,10 +40,7 @@ app.use(express.json());
 // ルーティングの設定
 app.use('/api', apiRoutes);
 
-const useCase = container.resolve(UpdateEnvLogUseCase);
-
-const client = new MqttController();
-
+const client = new MqttClient();
 
 // mqttClient.subscribe('env-data', updateEnv);
 // サーバーがリッスンするポート番号を指定
