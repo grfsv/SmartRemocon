@@ -12,20 +12,20 @@ import { EnvironmentLog as PrismaEnvLog } from '@prisma/client';
  */
 
 export class EnvLogMapper {
-    static toDomain(PrismaEnvLog: PrismaEnvLog): EnvLog {
-        return new EnvLog({
-            id: PrismaEnvLog.id,
-            deviceId: PrismaEnvLog.deviceId,
-            temperatureSht: PrismaEnvLog.temperature_sht,
-            humidity: PrismaEnvLog.humidity,
-            temperatureQmp: PrismaEnvLog.temperature_qmp,
-            pressure: PrismaEnvLog.pressure,
-            createdAt: PrismaEnvLog.created_at,
-            updatedAt: PrismaEnvLog.updated_at,
-        });
-    }
+  static toDomain(PrismaEnvLog: PrismaEnvLog): EnvLog {
+    return new EnvLog({
+      id: PrismaEnvLog.id,
+      deviceId: PrismaEnvLog.deviceId,
+      temperatureSht: PrismaEnvLog.temperature_sht,
+      humidity: PrismaEnvLog.humidity,
+      temperatureQmp: PrismaEnvLog.temperature_qmp,
+      pressure: PrismaEnvLog.pressure,
+      createdAt: PrismaEnvLog.created_at,
+      updatedAt: PrismaEnvLog.updated_at,
+    });
+  }
 
-    // static toPrisma(envLog: EnvLog): PrismaEnvLog {
-    //     return ;
-    // }
+  // static toPrisma(envLog: EnvLog): PrismaEnvLog {
+  //     return ;
+  // }
 }

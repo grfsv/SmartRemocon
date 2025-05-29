@@ -4,25 +4,25 @@ import { Server } from 'socket.io';
 
 @injectable()
 export class WebSocketClient {
-    private wss: Server;
+  private wss: Server;
 
-    constructor(@inject('WebServer') webServer: http.Server) {
-        this.wss = new Server(webServer, {});
+  constructor(@inject('WebServer') webServer: http.Server) {
+    this.wss = new Server(webServer, {});
 
-        this.wss.on('connection', (ws) => {
-            console.log('WebSocket client connected');
+    this.wss.on('connection', (ws) => {
+      console.log('WebSocket client connected');
 
-            ws.on('close', () => {
-                console.log('WebSocket client disconnected');
-            });
+      ws.on('close', () => {
+        console.log('WebSocket client disconnected');
+      });
 
-            ws.on('error', (error) => {
-                console.error('WebSocket error:', error);
-            });
-        });
-    }
-    
-    present(data: any) {
-        this.wss.emit('present', data);
-    }
+      ws.on('error', (error) => {
+        console.error('WebSocket error:', error);
+      });
+    });
+  }
+
+  present(data: any) {
+    this.wss.emit('present', data);
+  }
 }

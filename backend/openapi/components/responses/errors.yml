@@ -1,50 +1,50 @@
 schemas:
-    ErrorResponse:
-        type: object
-        properties:
-            status:
-                type: integer
-            error:
-                type: string
-            message:
-                type: string
-            details:
-                type: array
-                items:
-                    type: object
-                    properties:
-                        field:
-                            type: string
-                        issue:
-                            type: string
+  ErrorResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      error:
+        type: string
+      message:
+        type: string
+      details:
+        type: array
+        items:
+          type: object
+          properties:
+            field:
+              type: string
+            issue:
+              type: string
 responses:
-    BadRequest:
-        description: 不正なリクエスト
-        content:
-            application/json:
-                schema:
-                    $ref: '#/schemas/ErrorResponse'
-                example:
-                    status: 400
-                    error: 'Bad Request'
-                    message: 'リクエストパラメータが不正です。'
-    NotFound:
-        description: リソースが見つからない
-        content:
-            application/json:
-                schema:
-                    $ref: '#/schemas/ErrorResponse'
-                example:
-                    status: 404
-                    error: 'Not Found'
-                    message: 'リソースが見つかりません。'
-    Internal:
-        description: サーバー内部エラー
-        content:
-            application/json:
-                schema:
-                    $ref: '#/schemas/ErrorResponse'
-                example:
-                    status: 500
-                    error: 'Internal Server Error'
-                    message: 'サーバー内部エラーが発生しました。'
+  BadRequest:
+    description: 不正なリクエスト
+    content:
+      application/json:
+        schema:
+          $ref: '#/schemas/ErrorResponse'
+        example:
+          status: 400
+          error: 'Bad Request'
+          message: 'リクエストパラメータが不正です。'
+  NotFound:
+    description: リソースが見つからない
+    content:
+      application/json:
+        schema:
+          $ref: '#/schemas/ErrorResponse'
+        example:
+          status: 404
+          error: 'Not Found'
+          message: 'リソースが見つかりません。'
+  Internal:
+    description: サーバー内部エラー
+    content:
+      application/json:
+        schema:
+          $ref: '#/schemas/ErrorResponse'
+        example:
+          status: 500
+          error: 'Internal Server Error'
+          message: 'サーバー内部エラーが発生しました。'

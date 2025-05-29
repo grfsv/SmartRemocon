@@ -48,5 +48,5 @@ const port = 8000;
 
 // 指定したポートでHTTPサーバーを起動し、起動成功時にメッセージを出力
 httpServer.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port ${port}`);
 });

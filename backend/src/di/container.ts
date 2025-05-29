@@ -14,31 +14,31 @@ import DeviceRepository from '../domain/repositories/deviceRepository';
 import DeviceRepositoryImpl from '../infrastructure/database/deviceRepositoryImpl';
 
 export function initializeContainer(webServer: http.Server) {
-    // EnvLogRepository　と EnvLogRepositoryImplの紐付けを行う
-    container.register<EnvLogRepository>('EnvLogRepository', { useClass: EnvLogRepositoryImpl });
-    // GetEnvLog関連
-    // UseCaseInterface と GetListEnvLogUseCaseとの紐付けを行う
-    container.register<GetListEnvLogUseCase>('GetListEnvLogUseCase', {
-        useClass: GetListEnvLogUseCase,
-    });
-    container.register<GetListEnvLogController>('GetListEnvLogController', {
-        useClass: GetListEnvLogController,
-    });
-    // CreateEnvLog関連
+  // EnvLogRepository　と EnvLogRepositoryImplの紐付けを行う
+  container.register<EnvLogRepository>('EnvLogRepository', { useClass: EnvLogRepositoryImpl });
+  // GetEnvLog関連
+  // UseCaseInterface と GetListEnvLogUseCaseとの紐付けを行う
+  container.register<GetListEnvLogUseCase>('GetListEnvLogUseCase', {
+    useClass: GetListEnvLogUseCase,
+  });
+  container.register<GetListEnvLogController>('GetListEnvLogController', {
+    useClass: GetListEnvLogController,
+  });
+  // CreateEnvLog関連
 
-    // UseCaseInterface と UpdateEnvLogUseCaseとの紐付けを行う
-    container.register<UpdateEnvLogUseCase>('UpdateEnvLogUseCase', {
-        useClass: UpdateEnvLogUseCase,
-    });
+  // UseCaseInterface と UpdateEnvLogUseCaseとの紐付けを行う
+  container.register<UpdateEnvLogUseCase>('UpdateEnvLogUseCase', {
+    useClass: UpdateEnvLogUseCase,
+  });
 
-    container.register<UpdateEnvLogPresenter>('UpdateEnvLogPresenter', {
-        useClass: UpdateEnvLogPresenter,
-    });
-    container.register<DeviceRepository>('DeviceRepository', {
-        useClass: DeviceRepositoryImpl,
-    });
+  container.register<UpdateEnvLogPresenter>('UpdateEnvLogPresenter', {
+    useClass: UpdateEnvLogPresenter,
+  });
+  container.register<DeviceRepository>('DeviceRepository', {
+    useClass: DeviceRepositoryImpl,
+  });
 
-    container.registerInstance<http.Server>('WebServer', webServer);
-    container.registerInstance<WebSocketClient>('WebSocketClient', new WebSocketClient(webServer));
-    container.registerInstance('PrismaClient', new PrismaClient());
+  container.registerInstance<http.Server>('WebServer', webServer);
+  container.registerInstance<WebSocketClient>('WebSocketClient', new WebSocketClient(webServer));
+  container.registerInstance('PrismaClient', new PrismaClient());
 }

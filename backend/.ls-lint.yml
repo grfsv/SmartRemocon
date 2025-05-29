@@ -1,0 +1,7 @@
+ls:
+  src:
+    .dir: snake_case
+    .ts: camelCase
+ignore:
+  - node_modules
+  - .git

@@ -11,9 +11,9 @@ const apiRoutes: Router = Router();
 // );
 
 apiRoutes.get('/env-logs', (req, res) => {
-    // リクエスト時に解決
-    const controller = container.resolve(GetListEnvLogController);
-    return controller.run(req, res);
+  // リクエスト時に解決
+  const controller = container.resolve(GetListEnvLogController);
+  return controller.run(req, res);
 });
 
 export default apiRoutes;
