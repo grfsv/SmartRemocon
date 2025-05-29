@@ -19,10 +19,10 @@ model Device {
   ip_address String
   name String
   location String
-  collection_metrics String
+  collection_metrics Boolean 
   registered_at DateTime @default(now())
-  environment_log EnvironmentLog?
-  ir_sensor_value IrSensorValue?
+  environment_log EnvironmentLog[]
+  ir_sensor_value IrSensorValue[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
 }

@@ -1,8 +1,8 @@
-import type { Device } from './device';
+import type number from './device';
 
 type EnvLogProps = {
     id?: number;
-    device: Device;
+    deviceId: number;
     temperatureSht: number;
     humidity: number;
     temperatureQmp: number;
@@ -11,9 +11,9 @@ type EnvLogProps = {
     updatedAt: Date;
 };
 
-export class EnvLog {
+export default class EnvLog {
     private readonly _id?: number;
-    private _device?: Device;
+    private _deviceId?: number;
     private _temperatureSht: number;
     private _humidity: number;
     private _temperatureQmp: number;
@@ -23,7 +23,7 @@ export class EnvLog {
 
     constructor(props: EnvLogProps) {
         if (props.id) this._id = props.id;
-        this._device = props.device;
+        this._deviceId = props.deviceId;
         this._temperatureSht = props.temperatureSht;
         this._humidity = props.humidity;
         this._temperatureQmp = props.temperatureQmp;
@@ -36,12 +36,8 @@ export class EnvLog {
         return this._id;
     }
 
-    get device(): Device | undefined {
-        return this._device;
-    }
-
-    set device(device: Device) {
-        this._device = device;
+    get device(): number | undefined {
+        return this._deviceId;
     }
 
     get temperatureSht(): number {
@@ -63,18 +59,6 @@ export class EnvLog {
         return this._updatedAt;
     }
 
-    set temperatureSht(temperatureSht: number) {
-        this._temperatureSht = temperatureSht;
-    }
-    set humidity(humidity: number) {
-        this._humidity = humidity;
-    }
-    set temperatureQmp(temperatureQmp: number) {
-        this._temperatureQmp = temperatureQmp;
-    }
-    set pressure(pressure: number) {
-        this._pressure = pressure;
-    }
     set createdAt(createdAt: Date) {
         this._createdAt = createdAt;
     }

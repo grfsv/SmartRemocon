@@ -1,4 +1,4 @@
-import { Device } from './device';
+import Device from './device';
 
 type IRSensorValueProps = {
     id: number;
@@ -9,7 +9,7 @@ type IRSensorValueProps = {
     updatedAt: Date;
 };
 
-export class IRSensorValue {
+export default class IRSensorValue {
     private readonly _id?: number;
     private _device: Device;
     private _name: string;

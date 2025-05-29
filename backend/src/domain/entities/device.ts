@@ -1,5 +1,5 @@
-import { EnvLog } from './envLog';
-import { IRSensorValue } from './irSenserValue';
+import EnvLog from './envLog';
+import IRSensorValue from './irSenserValue';
 
 type DeviceProps = {
     id: number;
@@ -15,7 +15,7 @@ type DeviceProps = {
     updatedAt: Date;
 };
 
-export class Device {
+export default class Device {
     private readonly _id?: number;
     private _macAddress: string;
     private _ipAddress: string;
