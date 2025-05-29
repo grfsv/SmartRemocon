@@ -3,13 +3,15 @@ import 'reflect-metadata';
 import { container } from 'tsyringe';
 import http from 'http';
 import { PrismaClient } from '@prisma/client';
-import { EnvLog } from '../domain/entities/envLog';
 import { EnvLogRepositoryImpl } from '../infrastructure/database/envLogRepositoryImpl';
-import { EnvLogRepository } from '../domain/repositories/envLogRepository';
+import EnvLogRepository from '../domain/repositories/envLogRepository';
 import { GetListEnvLogController } from '../interface/controllers/envLogController';
 import { WebSocketClient } from '../infrastructure/websocket/websocket';
 import { GetListEnvLogUseCase } from '../usecases/getListEnvLogUseCase';
 import { UpdateEnvLogUseCase } from '../usecases/updateEnvLogUseCase';
+import { UpdateEnvLogPresenter } from '../interface/presenters/updateEnvLogPresenter';
+import DeviceRepository from '../domain/repositories/deviceRepository';
+import DeviceRepositoryImpl from '../infrastructure/database/deviceRepositoryImpl';
 
 export function initializeContainer(webServer: http.Server) {
     // EnvLogRepository　と EnvLogRepositoryImplの紐付けを行う
@@ -27,6 +29,13 @@ export function initializeContainer(webServer: http.Server) {
     // UseCaseInterface と UpdateEnvLogUseCaseとの紐付けを行う
     container.register<UpdateEnvLogUseCase>('UpdateEnvLogUseCase', {
         useClass: UpdateEnvLogUseCase,
+    });
+
+    container.register<UpdateEnvLogPresenter>('UpdateEnvLogPresenter', {
+        useClass: UpdateEnvLogPresenter,
+    });
+    container.register<DeviceRepository>('DeviceRepository', {
+        useClass: DeviceRepositoryImpl,
     });
 
     container.registerInstance<http.Server>('WebServer', webServer);

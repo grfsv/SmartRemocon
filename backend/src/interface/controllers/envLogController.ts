@@ -1,5 +1,5 @@
 import { inject, injectable } from 'tsyringe';
-import { EnvLog } from '../../domain/entities/envLog';
+import EnvLog from '../../domain/entities/envLog';
 import { GetListEnvLogUseCase } from '../../usecases/getListEnvLogUseCase';
 @injectable()
 export class GetListEnvLogController {
@@ -24,6 +24,8 @@ export class GetListEnvLogController {
 
                 return newItem;
             });
+
+            console.log('get', envLogDataWithoutUnderscore.length);
 
             res.status(200).json(envLogDataWithoutUnderscore);
         } catch (error) {

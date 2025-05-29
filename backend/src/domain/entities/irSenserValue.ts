@@ -2,7 +2,7 @@ import Device from './device';
 
 type IRSensorValueProps = {
     id: number;
-    device: Device;
+    deviceId: number;
     name: string;
     data: string;
     createdAt: Date;
@@ -11,15 +11,18 @@ type IRSensorValueProps = {
 
 export default class IRSensorValue {
     private readonly _id?: number;
-    private _device: Device;
+    private _deviceId: number;
     private _name: string;
     private _data: string;
     private _createdAt: Date;
     private _updatedAt: Date;
 
     constructor(props: IRSensorValueProps) {
-        this._id = props.id;
-        this._device = props.device;
+        if (props.id) {
+            this._id = props.id;
+        }
+
+        this._deviceId = props.deviceId;
         this._name = props.name;
         this._data = props.data;
         this._createdAt = props.createdAt;
@@ -30,38 +33,23 @@ export default class IRSensorValue {
         return this._id;
     }
 
-    get device(): Device {
-        return this._device;
-    }
-    set device(device: Device) {
-        this._device = device;
+    get deviceId(): number {
+        return this._deviceId;
     }
 
     get name(): string {
         return this._name;
     }
-    set name(name: string) {
-        this._name = name;
-    }
 
     get data(): string {
         return this._data;
-    }
-    set data(data: string) {
-        this._data = data;
     }
 
     get createdAt(): Date {
         return this._createdAt;
     }
-    set createdAt(createdAt: Date) {
-        this._createdAt = createdAt;
-    }
 
     get updatedAt(): Date {
         return this._updatedAt;
-    }
-    set updatedAt(updatedAt: Date) {
-        this._updatedAt = updatedAt;
     }
 }

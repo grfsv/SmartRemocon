@@ -19,7 +19,7 @@ model Device {
   ip_address String
   name String
   location String
-  collection_metrics Boolean 
+  collection_metrics Boolean
   registered_at DateTime @default(now())
   environment_log EnvironmentLog[]
   ir_sensor_value IrSensorValue[]
@@ -29,7 +29,8 @@ model Device {
 
 model EnvironmentLog {
   id Int @id @default(autoincrement())
-  device Device @relation(fields: [id], references: [id])
+  deviceId Int
+  device Device @relation(fields: [deviceId], references: [id])
   temperature_sht Float
   humidity Float
   temperature_qmp Float
@@ -40,7 +41,8 @@ model EnvironmentLog {
 
 model IrSensorValue {
   id Int @id @default(autoincrement())
-  device Device @relation(fields: [id], references: [id])
+  deviceId Int
+  device Device @relation(fields: [deviceId], references: [id])
   name String
   data String
   created_at DateTime @default(now())

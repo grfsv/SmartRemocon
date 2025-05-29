@@ -1,5 +1,4 @@
-import { EnvLog } from '../../domain/entities/envLog';
-import { Device } from '../../domain/entities/device';
+import EnvLog from '../../domain/entities/envLog';
 import { EnvironmentLog as PrismaEnvLog } from '@prisma/client';
 
 /**
@@ -16,7 +15,7 @@ export class EnvLogMapper {
     static toDomain(PrismaEnvLog: PrismaEnvLog): EnvLog {
         return new EnvLog({
             id: PrismaEnvLog.id,
-            device: {} as Device,
+            deviceId: PrismaEnvLog.deviceId,
             temperatureSht: PrismaEnvLog.temperature_sht,
             humidity: PrismaEnvLog.humidity,
             temperatureQmp: PrismaEnvLog.temperature_qmp,
@@ -26,15 +25,7 @@ export class EnvLogMapper {
         });
     }
 
-    static toPrisma(envLog: EnvLog): PrismaEnvLog {
-        return {
-            id: envLog.id!,
-            temperature_sht: envLog.temperatureSht,
-            humidity: envLog.humidity,
-            temperature_qmp: envLog.temperatureQmp,
-            pressure: envLog.pressure,
-            created_at: envLog.createdAt,
-            updated_at: envLog.updatedAt,
-        };
-    }
+    // static toPrisma(envLog: EnvLog): PrismaEnvLog {
+    //     return ;
+    // }
 }

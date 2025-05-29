@@ -1,4 +1,6 @@
 import mqtt from 'mqtt';
+import { container } from 'tsyringe';
+import { UpdateEnvLogUseCase } from '../../usecases/updateEnvLogUseCase';
 
 export class MqttClient {
     private client: mqtt.MqttClient;
@@ -18,15 +20,17 @@ export class MqttClient {
             // トピック購読
             // env-data
             this.client.subscribe('env-data', () => {
-                console.log('env-log subscribed');
+                console.log('env-data subscribed');
             });
         });
 
-        this.client.on('message', (topic, message) => {
-            const receivedMessage = message.toString;
-            if (topic == 'env-log') {
+        this.client.on('message', async (topic, message) => {
+            const receivedMessage = message.toString();
+            if (topic == 'env-data') {
+                const useCase = container.resolve(UpdateEnvLogUseCase);
+                await useCase.execute(JSON.parse(receivedMessage));
+                console.log(receivedMessage);
             }
-            console.log();
         });
     }
 }

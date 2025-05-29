@@ -1,8 +1,8 @@
 // import { EnvLogRepository } from '../domain/repositories/env_log_repository';
-import { EnvLog } from '../../domain/entities/envLog';
-import { PrismaClient, EnvironmentLog as PrismaEnvLog } from '@prisma/client';
+import EnvLog from '../../domain/entities/envLog';
+import { Prisma, PrismaClient, EnvironmentLog as PrismaEnvLog } from '@prisma/client';
 import { EnvLogMapper } from '../mapper/envLogMapper';
-import { EnvLogRepository } from '../../domain/repositories/envLogRepository';
+import EnvLogRepository from '../../domain/repositories/envLogRepository';
 import { injectable, inject } from 'tsyringe';
 
 @injectable()
@@ -23,7 +23,19 @@ export class EnvLogRepositoryImpl extends EnvLogRepository {
     }
     async create(envLog: EnvLog): Promise<EnvLog> {
         const createdEnvLog = await this.prisma.environmentLog.create({
-            data: EnvLogMapper.toPrisma(envLog),
+            data: {
+                temperature_sht: envLog.temperatureSht,
+                humidity: envLog.humidity,
+                temperature_qmp: envLog.temperatureQmp,
+                pressure: envLog.pressure,
+                created_at: envLog.createdAt,
+                updated_at: envLog.updatedAt,
+                device: {
+                    connect: {
+                        id: envLog.deviceId,
+                    },
+                },
+            },
         });
         return EnvLogMapper.toDomain(createdEnvLog);
     }

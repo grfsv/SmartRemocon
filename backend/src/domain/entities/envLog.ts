@@ -1,5 +1,3 @@
-import type number from './device';
-
 type EnvLogProps = {
     id?: number;
     deviceId: number;
@@ -13,7 +11,7 @@ type EnvLogProps = {
 
 export default class EnvLog {
     private readonly _id?: number;
-    private _deviceId?: number;
+    private _deviceId: number;
     private _temperatureSht: number;
     private _humidity: number;
     private _temperatureQmp: number;
@@ -36,7 +34,7 @@ export default class EnvLog {
         return this._id;
     }
 
-    get device(): number | undefined {
+    get deviceId(): number {
         return this._deviceId;
     }
 
