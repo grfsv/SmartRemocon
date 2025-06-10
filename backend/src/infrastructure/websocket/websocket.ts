@@ -10,8 +10,6 @@ export class WebSocketClient {
     this.wss = new Server(webServer, {});
 
     this.wss.on('connection', (ws) => {
-      console.log('WebSocket client connected');
-
       ws.on('close', () => {
         console.log('WebSocket client disconnected');
       });

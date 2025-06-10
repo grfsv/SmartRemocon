@@ -18,7 +18,7 @@ export class UpdateEnvLogUseCase {
 
   async execute(message: any) {
     // 送信元デバイスの存在を確認
-    const isExist = await this.deviceRepo.existById;
+    const isExist = await this.deviceRepo.existById(message.deviceId);
     if (!isExist) {
       // 有効なデバイスからの情報ではない
       return error;
@@ -36,7 +36,6 @@ export class UpdateEnvLogUseCase {
     });
     const data = await this.envRepo.create(envLog);
 
-    
     this.output.present(data);
   }
 }

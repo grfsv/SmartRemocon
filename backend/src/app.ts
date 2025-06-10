@@ -32,7 +32,7 @@ const httpServer: http.Server = http.createServer(app);
 
 initializeContainer(httpServer);
 // WebSocketの依存関係を解消
-container.resolve(WebSocketClient);
+// container.resolve(WebSocketClient);
 
 // 受信するリクエストのボディをJSONとして自動的に解析するミドルウェアを追加
 app.use(express.json());

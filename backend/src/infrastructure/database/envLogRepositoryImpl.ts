@@ -35,7 +35,6 @@ export class EnvLogRepositoryImpl implements EnvLogRepository {
         },
       },
     });
-    const result = EnvLogMapper.toDomain(createdEnvLog);
-    return result;
+    return EnvLogMapper.toDomain(createdEnvLog);
   }
 }
