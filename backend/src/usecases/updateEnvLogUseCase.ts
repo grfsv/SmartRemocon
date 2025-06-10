@@ -34,10 +34,9 @@ export class UpdateEnvLogUseCase {
       createdAt: message.createdAt ? new Date(message.createdAt) : new Date(), // encoded にあればそれを使用、なければ現在時刻
       updatedAt: message.updatedAt ? new Date(message.updatedAt) : new Date(), // 同上
     });
-    // console.log(message);
-    // console.log(envLog);
-
     const data = await this.envRepo.create(envLog);
+
+    
     this.output.present(data);
   }
 }

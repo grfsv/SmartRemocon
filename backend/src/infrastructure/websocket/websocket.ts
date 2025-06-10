@@ -22,7 +22,7 @@ export class WebSocketClient {
     });
   }
 
-  present(data: any) {
-    this.wss.emit('present', data);
+  present(event: string, data: any) {
+    this.wss.emit(event, data);
   }
 }

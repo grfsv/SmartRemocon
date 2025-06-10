@@ -10,20 +10,9 @@ export class GetListEnvLogController {
       const limit = parseInt(req.query.limit) || 30; // クエリパラメータからlimitを取得
       const envLogs = await this.useCase.execute(limit);
 
-      const envLogDataWithoutUnderscore = envLogs.map((item) => {
-        const newItem: { [key: string]: any } = {
-          id: item.id,
-          temperatureQmp: item.temperatureQmp,
-          temperatureSht: item.temperatureSht,
-          humidity: item.humidity,
-          pressure: item.pressure,
-          device: {},
-          createdAt: item.createdAt,
-          updatedAt: item.updatedAt,
-        };
+      // console.log('get', envLogs[0]);
 
-        return newItem;
-      });
+      const envLogDataWithoutUnderscore = envLogs.map((item) => item.toJSON());
 
       console.log('get', envLogDataWithoutUnderscore.length);
 

@@ -15,36 +15,42 @@ datasource db {
 
 model Device {
   id Int @id @default(autoincrement())
-  mac_address String
-  ip_address String
-  name String
-  location String
-  collection_metrics Boolean
+  mac_address String @db.VarChar(255) @unique
+  ip_address String @db.VarChar(255)
+  name String @db.VarChar(255)
+  location String? @db.Text
+  collection_metrics Boolean @default(false)
   registered_at DateTime @default(now())
-  environment_log EnvironmentLog[]
-  ir_sensor_value IrSensorValue[]
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+  environment_log EnvLog[]
+  ir_sensor_value IrSensorValue[]
+
+  @@map("devices")
 }
 
-model EnvironmentLog {
+model EnvLog {
   id Int @id @default(autoincrement())
-  deviceId Int
   device Device @relation(fields: [deviceId], references: [id])
+  deviceId Int
   temperature_sht Float
   humidity Float
   temperature_qmp Float
   pressure Float
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@map("env_logs")
 }
 
 model IrSensorValue {
   id Int @id @default(autoincrement())
-  deviceId Int
   device Device @relation(fields: [deviceId], references: [id])
+  deviceId Int
   name String
   data String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
+
+  @@map("ir_sensor_values")
 }

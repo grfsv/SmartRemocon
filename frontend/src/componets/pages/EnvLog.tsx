@@ -22,6 +22,7 @@ const Component: FC<Props> = ({ socket }) => {
 
     useEffect(() => {
         socket.on('env_log_update', (newData: EnvLog) => {
+            console.log('newData', newData);
             if (latest) {
                 setPastData((prevPastData) => [latest, ...prevPastData]);
             }

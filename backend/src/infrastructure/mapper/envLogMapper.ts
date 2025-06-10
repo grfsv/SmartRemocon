@@ -1,5 +1,5 @@
 import EnvLog from '../../domain/entities/envLog';
-import { EnvironmentLog as PrismaEnvLog } from '@prisma/client';
+import { EnvLog as PrismaEnvLog } from '@prisma/client';
 
 /**
  * @class EnvLogMapper

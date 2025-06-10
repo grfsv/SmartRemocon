@@ -63,4 +63,17 @@ export default class EnvLog {
   set updatedAt(updatedAt: Date) {
     this._updatedAt = updatedAt;
   }
+
+  public toJSON() {
+    return {
+      id: this.id,
+      deviceId: this.deviceId,
+      temperatureSht: this.temperatureSht,
+      humidity: this.humidity,
+      temperatureQmp: this.temperatureQmp,
+      pressure: this.pressure,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+    };
+  }
 }
